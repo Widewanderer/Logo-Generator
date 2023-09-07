@@ -1,6 +1,8 @@
-const inquirer = require("inquirer");
-const fs = require("fs");
-const generateImage = require("./lib/shapes");
+import inquirer from "inquirer";
+import fs from "fs";
+import { Shape, Triangle, Square, Circle } from "./lib/shapes.js";
+// const fs = require("fs");
+// const generateSvg = require("./lib/shapes");
 
 const questions = [
   {
@@ -50,10 +52,23 @@ const questions = [
   },
 ];
 
+// // Define a function to generate SVG content based on user answers
+// function generateSvg(answers) {
+//   // Your SVG generation logic here based on user answers
+//   // Construct the SVG content as needed
+//   // For example:
+//   const svgContent = `
+//     <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+//       <!-- Add your shapes and styles here based on user answers -->
+//     </svg>
+//   `;
+//   return svgContent;
+// }
+
 // TODO: Create a function to write logo.sv file
 // DATA probably needs to be modified. We are not adding the data (responses) to the file but using it to generate the image
-function writeToFile("logo.sv", data) {
-  fs.writeFile("logo.sv", data, (err) => {
+function writeToFile(data) {
+  fs.writeFile("logo.svg", data, (err) => {
     if (err) {
       console.error(err);
     }
@@ -61,12 +76,25 @@ function writeToFile("logo.sv", data) {
   });
 }
 
-// function to initialize app 
+// function to initialize app
 function init() {
   inquirer.prompt(questions).then((answers) => {
     console.log(answers);
-    const template = generateMarkdown(answers);
-    console.log(template);
-    writeToFile("README.md", template);
+    let choosenShape = "";
+    switch (answers.shape) {
+      case "Square":
+        choosenShape = new Square();
+        break;
+      case "Circle":
+        choosenShape = new Circle();
+        break;
+      default:
+        choosenShape = new Triangle();
+        break;
+    }
+    console.log(svgContent);
+    writeToFile("logo.svg", svgContent);
   });
 }
+
+init();
