@@ -52,7 +52,7 @@ Past contributions include
 
 ## Tests
 
-    Tests for shape construction are included using jest and can be run in the terminal using the npm test command.
+Tests for shape construction are included using jest and can be run in the terminal using the npm test command.
 
 ---
 
